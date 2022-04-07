@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: gorillalogic-app
+  name: gorillalogic-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gorillalogic-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: gorillalogic-app
+    spec:
+      containers:
+      - image: gorillalogic-image
+        name: gorillalogic-image
+        imagePullPolicy: IfNotPresent
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: gorillalogic-app
+  name: gorillalogic-app
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: gorillalogic-app
+  type: LoadBalancer
+status:
+  loadBalancer: {}
